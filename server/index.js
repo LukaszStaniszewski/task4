@@ -1,26 +1,25 @@
+require('dotenv').config({debug: true})
+
 const path = require("path")
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors")
 const cookieParser = require('cookie-parser')
-require('dotenv').config()
 const deserializeUser = require("./middleware/deserializeUser")
 const requireUser = require("./middleware/requireUser")
 const userControllers = require("./controllers/userControllers")
 const sessionControllers = require("./controllers/sessionControllers")
-const session = require("../client/build/")
-mongoose.connect(process.env.MONGO_URL).
+mongoose.connect("mongodb+srv://lukasz:ucdSB.ZXeip7Lcr@task4.i2vwe.mongodb.net/?retryWrites=true&w=majority").
 catch(error => console.error(error));
 
-const db = mongoose.connection;
+const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Database connected'))
 
 const app = express()
 
-
+console.log(process.env.NODE_ENV)
 app.use(cors({
-  origin: "https://taskmernapp.herokuapp.com",
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: false,
 }));
@@ -48,13 +47,16 @@ app.get("/users", requireUser, userControllers.sendUsers)
 
 app.post('/users', requireUser, userControllers.deleteUser)
 
-if(process.env.NODE_ENV === 'production') {
-  // app.use(express.static("../client/build"))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')))
 
-  app.use(express.static(path.join(__dirname, "../client/build")))
-  app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')))
+  app.get('*', (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
+    )
+  )
 } else {
-  app.get('/', (req, res) => res.send('Set to prodction'))
+  app.get('/', (req, res) => res.send('Please set to production'))
 }
 
 
