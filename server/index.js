@@ -20,7 +20,6 @@ const app = express()
 
 
 app.use(cors({
-  origin: "https://taskmernapp.herokuapp.com/",
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: false,
 }));
@@ -49,12 +48,12 @@ app.get("/users", requireUser, userControllers.sendUsers)
 app.post('/users', requireUser, userControllers.deleteUser)
 
 if(process.env.NODE_ENV === 'production') {
-  app.use(express.static("../client/build"))
+  // app.use(express.static("../client/build"))
 
-//   app.use(express.static(path.join(__dirname, "../client/build")))
-//   app.get("*", (res, req) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')))
-// } else {
-//   app.get('/', (req, res) => res.send('Set to prodction'))
+  app.use(express.static(path.join(__dirname, "../client/build")))
+  app.get("*", (res, req) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')))
+} else {
+  app.get('/', (req, res) => res.send('Set to prodction'))
 }
 
 
