@@ -20,7 +20,7 @@ const app = express()
 
 
 app.use(cors({
-  origin: "https://taskmernapp.herokuapp.com",
+  origin: process.env.ORIGIN,
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: false,
 }));
