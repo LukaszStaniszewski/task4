@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-react": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
-    "build": "npm run install-server && npm run install-client && npm run build-react",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run install --prefix server && npm run build --prefix client"
   },
   "author": "Lukasz Staniszewski",
   "license": "ISC"

@@ -8,7 +8,7 @@ const deserializeUser = require("./middleware/deserializeUser")
 const requireUser = require("./middleware/requireUser")
 const userControllers = require("./controllers/userControllers")
 const sessionControllers = require("./controllers/sessionControllers")
-
+const session = require("../client/build/")
 mongoose.connect(process.env.MONGO_URL).
 catch(error => console.error(error));
 
