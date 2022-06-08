@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-react": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
-    "build": "npm run install-server && npm run install-client && npm run build-react",
-    "start": "node server/index.js"
+    "server": "nodemon server/index.js",
+    "client": "npm start --prefix client",
+    "start": "node server/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Lukasz Staniszewski",
   "license": "ISC"
