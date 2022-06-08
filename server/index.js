@@ -9,7 +9,7 @@ const deserializeUser = require("./middleware/deserializeUser")
 const requireUser = require("./middleware/requireUser")
 const userControllers = require("./controllers/userControllers")
 const sessionControllers = require("./controllers/sessionControllers")
-mongoose.connect("mongodb+srv://lukasz:ucdSB.ZXeip7Lcr@task4.i2vwe.mongodb.net/?retryWrites=true&w=majority").
+mongoose.connect(process.env.MONGO_URL_CLOUD).
 catch(error => console.error(error));
 
 const db = mongoose.connection
@@ -18,8 +18,9 @@ db.once('open', () => console.log('Database connected'))
 
 const app = express()
 
-console.log(process.env.NODE_ENV)
+
 app.use(cors({
+  origin: "https://taskmernapp.herokuapp.com",
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: false,
 }));
