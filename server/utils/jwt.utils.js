@@ -6,7 +6,7 @@ const publicKey = process.env.JSON_TOKEN_PUBLIC_KEY
 exports.signJwt = (payload, options) => {
 options = options || '1m'
 
-  return jwt.sign(payload, privateKey, {algorithm: "HS512", expiresIn: options})
+  return jwt.sign(payload, privateKey, { expiresIn: options})
 }
 
 exports.verifyJwt = (token) => {
