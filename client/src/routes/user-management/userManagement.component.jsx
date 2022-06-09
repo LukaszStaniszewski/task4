@@ -10,8 +10,8 @@ import * as api from "../../api/axios-Instance.api"
 
 const UserManagement = () => {
   const [isChecked, setCheckBox] = useState(false)
-  const {users , updateUserData, usersToUpdate, deleteUsers, isLoading, setUsers} = useUsersContext()
-  const {currentUser, setCurrentUser, setLoading} =  useCurrentUserContext()
+  const {users , updateUserData, usersToUpdate, deleteUsers, setUsers} = useUsersContext()
+  const {currentUser, setCurrentUser, setLoading, isLoading} =  useCurrentUserContext()
   const navigate = useNavigate()
   
   useEffect(() => {
