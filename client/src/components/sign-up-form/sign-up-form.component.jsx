@@ -43,6 +43,8 @@ const handleSubmit = async (event) => {
   setFormFields(defaultFormFields)
   setLoading(false)
 } catch (error) {
+  setLoading(false)
+  setFormFields(defaultFormFields)
   alert("email already exist")
 }
   

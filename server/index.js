@@ -9,7 +9,7 @@ const deserializeUser = require("./middleware/deserializeUser")
 const requireUser = require("./middleware/requireUser")
 const userControllers = require("./controllers/userControllers")
 const sessionControllers = require("./controllers/sessionControllers")
-mongoose.connect(process.env.MONGO_URL_CLOUD).
+mongoose.connect(process.env.MONGO_URL).
 catch(error => console.error(error));
 
 const db = mongoose.connection
@@ -20,7 +20,7 @@ const app = express()
 
 
 app.use(cors({
-  origin: process.env.ORIGIN,
+  // origin: process.env.ORIGIN,
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: false,
 }));

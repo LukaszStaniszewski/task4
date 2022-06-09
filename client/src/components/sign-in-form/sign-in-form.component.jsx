@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import { useNavigate } from "react-router-dom"
 import { useCurrentUserContext } from "../../context/currentUser.context"
 import FormInput from "../form-input/form-input.component"
 import * as api from "../../api/axios-Instance.api"
@@ -13,8 +12,6 @@ const SignIn = () => {
 const [userCredentials, setUserCredentials] = useState(defaultUserCredentials)
 const {email, password} = userCredentials;
 const { authenticateAndSetUser, setLoading} = useCurrentUserContext()
-
-const navigate = useNavigate();
 
   const authorize = async () => {
     const userAuth = await api.signIn(userCredentials)
